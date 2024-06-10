@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getSettings } from "@/sanity/sanity.query";
 import { toPlainText } from "next-sanity";
 import { SettingsType } from "@/types";
@@ -31,6 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <SpeedInsights />
       <body className={inter.className}>{children}</body>
     </html>
   );
