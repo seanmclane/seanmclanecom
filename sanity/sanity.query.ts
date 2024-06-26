@@ -1,9 +1,10 @@
 import { groq } from "next-sanity"
 import client from './sanity.client'
+import { PersonaType } from "@/types"
 
 export async function getProfile() {
   return client.fetch(
-    groq`*[_type == "profile"][0]{
+    groq`*[_id == "profile"][0]{
     _id,
     fullName,
     headline,
@@ -20,7 +21,7 @@ export async function getProfile() {
 
 export async function getSettings() {
   return client.fetch(
-    groq`*[_type == "settings"][0]{
+    groq`*[_id == "settings"][0]{
     _id,
     title,
     overview,
@@ -29,4 +30,15 @@ export async function getSettings() {
     }
     `
   )
+}
+
+export async function getPostsByPersona(persona: {title: string}) {
+  return client.fetch(
+    groq`*[_type == "post" && persona->title == $persona.title]|order(publishedAt)[0...20]{
+      slug,
+      title,
+      publishedAt,
+      mainImage {alt, "image": asset->url}
+    }`
+  , { persona })
 }

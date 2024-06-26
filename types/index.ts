@@ -24,3 +24,24 @@ export type SettingsType = {
     image: string
   }
 }
+
+export type PersonaType = {
+  title: string,
+  description: string,
+  order: number
+}
+
+export type PostType = {
+  slug: {
+    current: string
+  },
+  title: string,
+  publishedAt: string,
+  author: ProfileType,
+  mainImage: {
+    alt: string,
+    image: string
+  },
+  body: PortableTextBlock[],
+  persona: PersonaType
+}
