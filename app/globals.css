@@ -8,7 +8,6 @@
   --background-end-rgb: 20, 20, 20;
 }
 
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -43,4 +42,26 @@ h4 {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+#postPortableText>h1,#postPortableText>h2,#postPortableText>h3,#postPortableText>h4,#postPortableText>h5,#postPortableText>h6 {
+  margin-top: 0em;
+  margin-bottom: 1em;
+}
+
+#postPortableText>p,#postPortableText>ul {
+  margin-bottom: 1em;
+  line-height: 1.6em;
+}
+
+#postPortableText>img + p>em {
+  position: absolute;
+  margin-top: -3em;
+  padding: 0.5em 1em 0.5em 0.5em;
+  background-color: #b8b8b8;
+}
+
+#postPortableText>ul>li {
+  list-style-type: disc;
+  list-style-position: inside;
 }

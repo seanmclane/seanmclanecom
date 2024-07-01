@@ -22,6 +22,11 @@ export default defineType({
       validation: rule => rule.required()
     }),
     defineField({
+      name: 'draft',
+      title: 'Draft',
+      type: 'boolean'
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
@@ -34,6 +39,13 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          validation: rule => rule.required()
+        }
+      ]
     }),
     defineField({
       name: 'persona',
@@ -45,12 +57,27 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: "array",
-      of: [{ type: "block" }],
+      of: [
+        { type: "block" }, 
+        { type: 'image',
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+              description: 'Important for SEO and accessiblity.',
+                options: {
+                  isHighlighted: true,
+              },
+            },
+          ],
+        }],
     }),
   ],
 
@@ -65,4 +92,8 @@ export default defineType({
       return {...selection, subtitle: author && `by ${author}`}
     },
   },
+  initialValue: () => ({
+    draft: true,
+    publishedAt: new Date().toISOString()
+  })
 })

@@ -12,7 +12,11 @@ export type ProfileType = {
   email: string,
   fullBio: PortableTextBlock[],
   location: string,
-  socialLinks: string[],
+  socialLinks: {
+    mountainproject: string,
+    github: string,
+    instagram: string
+  },
 }
 
 export type SettingsType = {
@@ -36,6 +40,7 @@ export type PostType = {
     current: string
   },
   title: string,
+  draft: boolean,
   publishedAt: string,
   author: ProfileType,
   mainImage: {
@@ -44,4 +49,22 @@ export type PostType = {
   },
   body: PortableTextBlock[],
   persona: PersonaType
+}
+
+export type ClimbsType = {
+  Date: string,
+  Route: string,
+  Rating: string,
+  Notes: string,
+  URL: string,
+  Pitches: number,
+  Location: string,
+  Avg_Stars: number,
+  Your_Stars: number,
+  Style: string,
+  Lead_Style?: string,
+  Route_Type: string,
+  Your_Rating: string,
+  Length: number,
+  Rating_Code: number
 }

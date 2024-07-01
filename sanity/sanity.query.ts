@@ -34,7 +34,7 @@ export async function getSettings() {
 
 export async function getPostsByPersona(persona: {title: string}) {
   return client.fetch(
-    groq`*[_type == "post" && persona->title == $persona.title]|order(publishedAt)[0...20]{
+    groq`*[_type == "post" && persona->title == $persona.title && draft == false]|order(publishedAt desc)[0...10]{
       slug,
       title,
       publishedAt,
