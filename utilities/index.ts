@@ -23,14 +23,36 @@ export function convertClimbsToJSON(csv: string): ClimbsType[] {
   // parsedData.splice(0,2)
   parsedData.splice(-1,1)
 
-  let headers = parsedData.shift()
-  headers = headers.map((value) => {
+  let rawHeaders = parsedData.shift() || ['']
+  const headers = rawHeaders.map((value) => {
     return value.replace(/\s/g, `_`)
   })
-  return parsedData.map((values) => {
+
+  const headerKeys = [
+    'Date',
+    'Route',
+    'Rating',
+    'Notes',
+    'URL',
+    'Pitches',
+    'Location',
+    'Avg_Stars',
+    'Your_Stars',
+    'Style',
+    'Lead_Style',
+    'Route_Type',
+    'Your_Rating',
+    'Length',
+    'Rating_Code'
+  ]
+
+  let out: ClimbsType[] = parsedData.map((values) => {
     return headers.reduce((obj, key, index) => {
-      obj[key] = values[index]
+      // I don't like casting to any but I couldn't figure out why I couldn't tell it "key" was keyof ClimbsType
+      (obj as any)[key] = values[index]
       return obj
-    }, {})
+    }, {} as ClimbsType)
   })
+  
+  return out
 }
