@@ -5,6 +5,7 @@ import Card from "@/components/Card"
 import Link from "next/link"
 import { formatISODateToLocaleString } from "@/utilities"
 import MPData from "@/components/MPData"
+import ShanLogoHeader from "@/components/ShanLogoHeader"
 
 export const metadata = {
   title: "Climber"
@@ -13,7 +14,8 @@ export const metadata = {
 export default async function Climber() {
   const posts: [PostType] = await getPostsByPersona({title: "climber"})
   return (
-  <div>
+  <>
+    <ShanLogoHeader />
     <PersonaSelector selected="climber"/>
     <div className="flex flex-col items-center mb-8">
       <MPData />
@@ -35,6 +37,6 @@ export default async function Climber() {
         ))}
       </div>
     </div>
-  </div>
+  </>
   )
 }

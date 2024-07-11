@@ -373,19 +373,19 @@ export default async function MPData() {
         <Link href={profile.socialLinks.mountainproject}>Sean McLane on Mountain Project</Link>
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
-        <Link href={hardestIce.URL} className="p-2 m-2 bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestIce.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
           <h2>Hardest Ice Lead</h2>
           <h3>{hardestIce.Rating}</h3>
         </Link>
-        <Link href={hardestMixed.URL} className="p-2 m-2 bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestMixed.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
           <h2>Hardest Mixed Lead</h2>
           <h3>{hardestMixed.Rating}</h3>
         </Link>
-        <Link href={hardestTrad.URL} className="p-2 m-2 bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestTrad.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
           <h2>Hardest Trad Lead</h2>
           <h3>{hardestTrad.Rating}</h3>
         </Link>
-        <Link href={hardestSport.URL} className="p-2 m-2 bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestSport.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
           <h2>Hardest Sport Lead</h2>
           <h3>{hardestSport.Rating}</h3>
         </Link>

@@ -7,15 +7,15 @@ import { formatISODateToLocaleString } from "@/utilities"
 import ShanLogoHeader from "@/components/ShanLogoHeader"
 
 export const metadata = {
-  title: "Nerd"
+  title: "Developer"
 }
 
-export default async function Nerd() {
-  const posts: [PostType] = await getPostsByPersona({title: "nerd"})
+export default async function Developer() {
+  const posts: [PostType] = await getPostsByPersona({title: "developer"})
   return (
   <div>
     <ShanLogoHeader />
-    <PersonaSelector selected="nerd"/>
+    <PersonaSelector selected="developer"/>
     <div className="flex flex-col items-center mb-8">
       <h2 className="text-4xl" >Blog Posts</h2>
       <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-center lg:max-w-6xl m-auto">

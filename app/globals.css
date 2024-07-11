@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 20, 20, 20;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 235, 235, 235;
 }
 
 body {
@@ -64,4 +64,8 @@ h4 {
 #postPortableText>ul>li {
   list-style-type: disc;
   list-style-position: inside;
+}
+
+#postPortableText a {
+  text-decoration: underline;
 }

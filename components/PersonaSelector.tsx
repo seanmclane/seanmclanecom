@@ -16,9 +16,9 @@ export default async function PersonaSelector({selected}: Props) {
 
   return (
     <div className="flex flex-col items-center p-8">
-      <h1 className="text-6xl lg:text-8xl"><Link className="text-theme" href="/">Sean McLane</Link> is a 
+      <h1 className="text-6xl lg:text-8xl">Sean McLane is a 
         <span className="text-theme text-6xl lg:text-8xl font-sans uppercase bg-transparent">
-          <Dropdown defaultState={selected || "___________"} items={personas} listStyle="bg-black py-2 px-6 border-theme border-2" />
+          <Dropdown defaultState={selected || "_____________"} items={personas} listStyle="bg-white py-4 px-8 border-theme border-2" />
         </span>
       </h1>
     </div>
