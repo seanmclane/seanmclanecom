@@ -16,7 +16,7 @@ export default async function Nerd() {
   const posts: [PostType] = await getPostsByPersona({title: "nerd"})
   return (
   <div>
-    <ShanLogoHeader />
+    <ShanLogoHeader links={persona.socialLinks} />
     <PersonaSelector selected="nerd"/>
     <Hero persona={persona} />
     <div className="flex flex-col items-center mb-8">

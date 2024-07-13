@@ -21,7 +21,13 @@ export type PersonaType = {
     image: string
   },
   fullBio: PortableTextBlock[],
-  socialLinks: string[]
+  socialLinks: Array<{
+    url: string,
+    name?: string,
+    icon: {
+      image: string
+    }
+  }>
 }
 
 export type PostType = {

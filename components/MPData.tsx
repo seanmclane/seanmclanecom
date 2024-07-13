@@ -370,7 +370,7 @@ export default async function MPData() {
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-theme text-4xl py-2">
-        <Link href={persona.socialLinks && persona.socialLinks.length > 0 ? persona.socialLinks.filter(s => s.includes("mountainproject"))[0] : "https://www.mountainproject.com"}>Sean on Mountain Project</Link>
+        <Link href={persona.socialLinks && persona.socialLinks.length > 0 ? persona.socialLinks.filter(s => s.url.includes("mountainproject"))[0].url : "https://www.mountainproject.com"}>Sean on Mountain Project</Link>
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
         <Link href={hardestIce.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">

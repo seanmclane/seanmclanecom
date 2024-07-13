@@ -9,9 +9,8 @@ export async function getPersona(persona: {title: string}) {
     fullName,
     headline,
     profileImage {alt, "image": asset->url},
-    shortBio,
     fullBio,
-    socialLinks[]
+    socialLinks[]{url, icon{"image": asset->url}, name}
     }`
     , {persona})
 }

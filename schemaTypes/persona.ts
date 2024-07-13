@@ -59,7 +59,29 @@ export default defineType({
       title: "Social Links",
       type: "array",
       description: "Add your links:",
-      of: [{type: "url"}]
+      of: [defineField({
+        name: "socialLink",
+        title: "Social Link",
+        type: "object",
+        fields: [{
+          name: "url",
+          title: "URL",
+          type: "url",
+          validation: r => r.required()
+        },
+        {
+          name: "name",
+          title: "Handle",
+          type: "string"
+        },
+        {
+          name: "icon",
+          title: "Icon",
+          type: "image",
+          validation: r => r.required()
+        }
+      ]
+      })]
     })
   ],
 })

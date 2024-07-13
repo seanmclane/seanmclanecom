@@ -17,7 +17,7 @@ export default async function Climber() {
   const posts: [PostType] = await getPostsByPersona({title: "climber"})
   return (
   <>
-    <ShanLogoHeader />
+    <ShanLogoHeader links={persona.socialLinks} />
     <PersonaSelector selected="climber"/>
     <Hero persona={persona} />
     <div className="flex flex-col items-center mb-8">

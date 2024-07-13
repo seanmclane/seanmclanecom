@@ -16,7 +16,7 @@ export default async function Musician() {
   const posts: [PostType] = await getPostsByPersona({title: "musician"})
   return (
   <div>
-    <ShanLogoHeader />
+    <ShanLogoHeader links={persona.socialLinks} />
     <PersonaSelector selected="musician"/>
     <Hero persona={persona} />
     <div className="flex flex-col items-center mb-8">
