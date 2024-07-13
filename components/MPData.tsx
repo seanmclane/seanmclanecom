@@ -1,8 +1,8 @@
 import { convertClimbsToJSON, formatISODateToLocaleString } from "@/utilities"
 import { ClimbsType } from "@/types"
 import Link from "next/link"
-import { getProfile } from "@/sanity/sanity.query"
-import { ProfileType } from "@/types"
+import { getPersona } from "@/sanity/sanity.query"
+import { PersonaType } from "@/types"
 
 const ratingCodes = {
   // sourced from https://www.mountainproject.com/forum/topic/116208707/rating-code-sorting-ticks
@@ -334,7 +334,7 @@ async function getData() {
 }
 
 export default async function MPData() {
-  const profile: ProfileType = await getProfile()
+  const persona: PersonaType = await getPersona({title: "climber"})
   const data = await getData()
  
   const climbsJSON: ClimbsType[] = convertClimbsToJSON(data)
@@ -370,7 +370,7 @@ export default async function MPData() {
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-theme text-4xl py-2">
-        <Link href={profile.socialLinks.mountainproject}>Sean McLane on Mountain Project</Link>
+        <Link href={persona.socialLinks && persona.socialLinks.length > 0 ? persona.socialLinks.filter(s => s.includes("mountainproject"))[0] : "https://www.mountainproject.com"}>Sean on Mountain Project</Link>
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
         <Link href={hardestIce.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
@@ -390,7 +390,7 @@ export default async function MPData() {
           <h3>{hardestSport.Rating}</h3>
         </Link>
       </div>
-      <h2>Recent Climbs</h2>
+      <h2 className="mt-4">Recent Climbs</h2>
       <div className="flex flex-row flex-wrap justify-center max-w-6xl">
         {climbs && climbs.map(c => (
           <div key={`${c.Route} - ${c.Notes}`} className="text-white bg-theme p-2 m-2 rounded-lg min-w-80">

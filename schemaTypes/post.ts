@@ -27,12 +27,6 @@ export default defineType({
       type: 'boolean'
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'profile'},
-    }),
-    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',

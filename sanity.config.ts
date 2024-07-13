@@ -36,18 +36,6 @@ export default defineConfig({
               .schemaType("settings")
               .documentId("settings")
           ),
-          S.listItem()
-          .title("Profile")
-          .id("profile")
-          .child(
-            // Instead of rendering a list of documents, we render a single
-            // document, specifying the `documentId` manually to ensure
-            // that we're editing the single instance of the document
-            S.document()
-              .schemaType("profile")
-              .documentId("profile")
-          ),
-
           // Regular document types
           // S.documentTypeListItem("blogPost").title("Blog Posts"),
           // S.documentTypeListItem("author").title("Authors"),

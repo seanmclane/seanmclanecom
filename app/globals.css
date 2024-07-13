@@ -66,6 +66,6 @@ h4 {
   list-style-position: inside;
 }
 
-#postPortableText a {
+#postPortableText a, #hero a {
   text-decoration: underline;
 }

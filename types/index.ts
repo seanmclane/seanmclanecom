@@ -1,24 +1,5 @@
 import { PortableTextBlock } from "sanity"
 
-export type ProfileType = {
-  _id: string,
-  fullName: string,
-  headline: string,
-  profileImage: {
-    alt: string,
-    image: string
-  },
-  shortBio: string,
-  email: string,
-  fullBio: PortableTextBlock[],
-  location: string,
-  socialLinks: {
-    mountainproject: string,
-    github: string,
-    instagram: string
-  },
-}
-
 export type SettingsType = {
   _id: string,
   title: string,
@@ -32,7 +13,15 @@ export type SettingsType = {
 export type PersonaType = {
   title: string,
   description: string,
-  order: number
+  order: number,
+  fullName: string,
+  headline: string,
+  profileImage: {
+    alt: string,
+    image: string
+  },
+  fullBio: PortableTextBlock[],
+  socialLinks: string[]
 }
 
 export type PostType = {
@@ -42,13 +31,12 @@ export type PostType = {
   title: string,
   draft: boolean,
   publishedAt: string,
-  author: ProfileType,
+  persona: PersonaType,
   mainImage: {
     alt: string,
     image: string
   },
   body: PortableTextBlock[],
-  persona: PersonaType
 }
 
 export type ClimbsType = {

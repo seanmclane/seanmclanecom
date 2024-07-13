@@ -11,9 +11,37 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+      name: "fullName",
+      title: "Full Name",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "headline",
+      title: "Headline",
+      type: "string",
+      description: "In the format: is a blah blah blah.",
+      validation: (rule) => rule.required().min(30).max(60),
+    }),
+    defineField({
+      name: 'fullBio',
+      title: 'Full Bio',
+      type: "array",
+      of: [{ type: "block" }],
+    }),
+    defineField({
+      name: "profileImage",
+      title: "Profile Image",
+      type: "image",
+      description: "Upload a profile picture",
+      options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt",
+          type: "string",
+        },
+      ],
     }),
     defineField({
       name: 'order',
@@ -26,5 +54,12 @@ export default defineType({
       title: 'Active',
       type: 'boolean'
     }),
+    defineField({
+      name: "socialLinks",
+      title: "Social Links",
+      type: "array",
+      description: "Add your links:",
+      of: [{type: "url"}]
+    })
   ],
 })

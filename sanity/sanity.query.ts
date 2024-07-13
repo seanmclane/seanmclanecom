@@ -1,22 +1,19 @@
 import { groq } from "next-sanity"
 import client from './sanity.client'
-import { PersonaType } from "@/types"
 
-export async function getProfile() {
+export async function getPersona(persona: {title: string}) {
   return client.fetch(
-    groq`*[_id == "profile"][0]{
+    groq`*[_type == "persona" && title == $persona.title][0]{
     _id,
+    title,
     fullName,
     headline,
     profileImage {alt, "image": asset->url},
     shortBio,
-    location,
     fullBio,
-    email,
-    socialLinks
-    }
-    `
-  )
+    socialLinks[]
+    }`
+    , {persona})
 }
 
 export async function getSettings() {

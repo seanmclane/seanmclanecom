@@ -1,7 +1,8 @@
 import PersonaSelector from "@/components/PersonaSelector"
-import { PostType } from "@/types"
-import { getPostsByPersona } from "@/sanity/sanity.query"
+import { PostType, PersonaType } from "@/types"
+import { getPersona, getPostsByPersona } from "@/sanity/sanity.query"
 import Card from "@/components/Card"
+import Hero from "@/components/Hero"
 import Link from "next/link"
 import { formatISODateToLocaleString } from "@/utilities"
 import ShanLogoHeader from "@/components/ShanLogoHeader"
@@ -11,11 +12,13 @@ export const metadata = {
 }
 
 export default async function Developer() {
+  const persona: PersonaType = await getPersona({title: "developer"})
   const posts: [PostType] = await getPostsByPersona({title: "developer"})
   return (
   <div>
     <ShanLogoHeader />
     <PersonaSelector selected="developer"/>
+    <Hero persona={persona} />
     <div className="flex flex-col items-center mb-8">
       <h2 className="text-4xl" >Blog Posts</h2>
       <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-center lg:max-w-6xl m-auto">

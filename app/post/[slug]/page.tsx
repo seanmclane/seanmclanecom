@@ -4,14 +4,6 @@ import { formatISODateToLocaleString } from "@/utilities"
 import Body from "@/components/Body"
 import { Image } from "next-sanity/image"
 
-interface Props {
-  post: {
-    slug: {
-      current: string
-    }
-  }
-}
-
 interface Params {
   params: {
     slug: string
@@ -22,10 +14,10 @@ async function getPost(params: {slug: string}): Promise<PostType> {
   const {slug = ""} = params
   const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0]{
     title,
-    author -> {
+    persona -> {
       fullName,
       profileImage {alt, "image": asset->url},
-      shortBio
+      headline
     },
     publishedAt,
     mainImage {alt, "image": asset->url},
@@ -55,10 +47,10 @@ export default async function Post({params}: Params) {
       </div>
       <hr className=" border-gray-400 mt-16 w-5/6"/>
       <div className="flex flex-row justify-center items-center p-4 my-8">  
-        <Image className="rounded-full grayscale" src={post.author.profileImage.image} alt={post.author.profileImage.alt} width={60} height={60} />
+        <Image className="rounded-full grayscale" src={post.persona.profileImage.image} alt={post.persona.profileImage.alt} width={60} height={60} />
         <div className="text-gray-500 pl-4">
-          <span >{post.author.fullName}</span>
-          <span> {post.author.shortBio}</span>
+          <span >{post.persona.fullName}</span>
+          <span> {post.persona.headline}</span>
         </div>
       </div>
     </article>
