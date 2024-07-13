@@ -5,7 +5,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center">
-      <ShanLogoHeader />
+      <ShanLogoHeader links={[]}/>
       <PersonaSelector />
     </main>
   )
