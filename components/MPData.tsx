@@ -326,7 +326,7 @@ const ratingCodes = {
 }
 
 async function getData() {
-  const r = await fetch("https://www.mountainproject.com/user/108959833/sean-mclane/tick-export")
+  const r = await fetch("https://www.mountainproject.com/user/108959833/sean-mclane/tick-export", { next: { revalidate: 86400 } })
   if (!r.ok) {
     throw new Error("Did not get MP data")
   }
