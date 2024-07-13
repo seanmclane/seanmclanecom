@@ -373,19 +373,19 @@ export default async function MPData() {
         <Link href={persona.socialLinks && persona.socialLinks.length > 0 ? persona.socialLinks.filter(s => s.url.includes("mountainproject"))[0].url : "https://www.mountainproject.com"}>Sean on Mountain Project</Link>
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
-        <Link href={hardestIce.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestIce.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md">
           <h2>Hardest Ice Lead</h2>
           <h3>{hardestIce.Rating}</h3>
         </Link>
-        <Link href={hardestMixed.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestMixed.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md">
           <h2>Hardest Mixed Lead</h2>
           <h3>{hardestMixed.Rating}</h3>
         </Link>
-        <Link href={hardestTrad.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestTrad.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md">
           <h2>Hardest Trad Lead</h2>
           <h3>{hardestTrad.Rating}</h3>
         </Link>
-        <Link href={hardestSport.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center">
+        <Link href={hardestSport.URL} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md">
           <h2>Hardest Sport Lead</h2>
           <h3>{hardestSport.Rating}</h3>
         </Link>
@@ -393,7 +393,7 @@ export default async function MPData() {
       <h2 className="mt-4">Recent Climbs</h2>
       <div className="flex flex-row flex-wrap justify-center max-w-6xl">
         {climbs && climbs.map(c => (
-          <div key={`${c.Route} - ${c.Notes}`} className="text-white bg-theme p-2 m-2 rounded-lg min-w-80">
+          <div key={`${c.Route} - ${c.Notes}`} className="text-white bg-theme p-2 m-2 rounded-lg min-w-80 shadow-md">
             <Link href={c.URL}>
               <h2 className="px-2">{c.Route}</h2>
               <div className="flex flex-row justify-between items-center">

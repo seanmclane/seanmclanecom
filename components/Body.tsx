@@ -32,6 +32,7 @@ const Body = ({props}: any) => {
             priority={false}
             blurDataURL={urlForImage(value.asset).width(24).height(24).blur(10).url()}
             placeholder="blur"
+            className="mb-4"
           />
         )
       }

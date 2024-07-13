@@ -78,12 +78,12 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.fullName',
+      persona: 'persona.fullName',
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const {persona} = selection
+      return {...selection, subtitle: persona && `by ${persona}`}
     },
   },
   initialValue: () => ({
