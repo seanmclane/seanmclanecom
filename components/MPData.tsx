@@ -334,8 +334,10 @@ async function getData() {
 }
 
 export default async function MPData() {
-  const persona: PersonaType = await loadPersona({title: "climber"})
-  const data = await getData()
+  const [{data: persona}, data] = await Promise.all([
+    loadPersona({title: "climber"}),
+    getData()
+  ])
  
   const climbsJSON: ClimbsType[] = convertClimbsToJSON(data)
   const climbs = climbsJSON.slice(0,6)
