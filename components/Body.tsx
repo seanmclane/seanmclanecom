@@ -1,5 +1,5 @@
 import { PortableText } from "next-sanity"
-import { urlForImage } from "@/sanity/sanity.image"
+import { urlForImage } from "@/sanity/lib/image"
 import { Image } from "next-sanity/image"
 import { getImageDimensions } from "@sanity/asset-utils"
 

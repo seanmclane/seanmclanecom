@@ -1,13 +1,13 @@
-import client from "@/sanity/sanity.client"
 import Dropdown from "@/components/Dropdown"
-import Link from "next/link"
+import { loadQuery } from "@/sanity/lib/loadQuery"
 
 interface Props {
   selected?: string
 }
 
 async function getPersonas() {
-  const personas = await client.fetch(`*[_type == "persona" && active == true]| order(order) .title`)
+  //adding perspecticve published stopped weird characters in my links from stega
+  const personas = await loadQuery<string[]>({ query: `*[_type == "persona" && active == true]| order(order) .title`, perspective: "published"})
   return personas
 }
 

@@ -1,8 +1,9 @@
-import client from "@/sanity/sanity.client"
+import { loadQuery } from "@/sanity/lib/loadQuery"
 import { PostType } from "@/types"
 import { formatISODateToLocaleString } from "@/utilities"
 import Body from "@/components/Body"
 import { Image } from "next-sanity/image"
+import { generateStaticSlugs } from "@/sanity/loader/generateStaticSlugs"
 
 interface Params {
   params: {
@@ -11,8 +12,10 @@ interface Params {
 }
 
 async function getPost(params: {slug: string}): Promise<PostType> {
-  const {slug = ""} = params
-  const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0]{
+  const { slug } = params
+  const post = await loadQuery<PostType>({
+    query: 
+  `*[_type == "post" && slug.current == $slug][0]{
     title,
     persona -> {
       fullName,
@@ -22,7 +25,8 @@ async function getPost(params: {slug: string}): Promise<PostType> {
     publishedAt,
     mainImage {alt, "image": asset->url},
     body
-  }`, { slug })
+  }`, params: { slug }
+})
   return post
 }
 

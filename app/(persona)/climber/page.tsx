@@ -1,6 +1,5 @@
 import PersonaSelector from "@/components/PersonaSelector"
-import { getPostsByPersona, getPersona} from "@/sanity/sanity.query"
-import { PostType, PersonaType } from "@/types"
+import { getPostsByPersona, getPersona} from "@/sanity/lib/queries"
 import Card from "@/components/Card"
 import Hero from "@/components/Hero"
 import Link from "next/link"
@@ -13,8 +12,8 @@ export const metadata = {
 }
 
 export default async function Climber() {
-  const persona: PersonaType = await getPersona({title: "climber"})
-  const posts: [PostType] = await getPostsByPersona({title: "climber"})
+  const persona= await getPersona({title: "climber"})
+  const posts = await getPostsByPersona({title: "climber"})
   return (
   <>
     <ShanLogoHeader links={persona.socialLinks} />
