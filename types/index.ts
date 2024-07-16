@@ -62,3 +62,11 @@ export type ClimbsType = {
   Length: number,
   Rating_Code: number
 }
+
+export type MPDataType = {
+  recentClimbs: ClimbsType[],
+  hardestIce: ClimbsType,
+  hardestMixed: ClimbsType,
+  hardestSport: ClimbsType,
+  hardestTrad: ClimbsType
+}
