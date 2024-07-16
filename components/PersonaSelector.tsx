@@ -6,8 +6,9 @@ interface Props {
 }
 
 async function getPersonas() {
-  //adding perspecticve published stopped weird characters in my links from stega
-  const personas = await loadQuery<string[]>({ query: `*[_type == "persona" && active == true]| order(order) .title`, perspective: "published"})
+  //adding stega false stopped weird characters in my links
+  //hopefully this works on vercel previews too...
+  const personas = await loadQuery<string[]>({ query: `*[_type == "persona" && active == true]| order(order) .title`, stega: false})
   return personas
 }
 
