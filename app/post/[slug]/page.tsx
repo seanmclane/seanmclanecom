@@ -3,7 +3,6 @@ import { PostType } from "@/types"
 import { formatISODateToLocaleString } from "@/utilities"
 import Body from "@/components/Body"
 import { Image } from "next-sanity/image"
-import { generateStaticSlugs } from "@/sanity/loader/generateStaticSlugs"
 
 interface Params {
   params: {
