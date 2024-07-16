@@ -3,7 +3,7 @@ import { loadQuery } from './loadQuery'
 import { PersonaType, PostType, SettingsType } from "@/types"
 
 export async function loadPersona(persona: {title: string}) {
-  return loadQuery<PersonaType | null>(
+  return loadQuery<PersonaType>(
     groq`*[_type == "persona" && title == $persona.title][0]{
     _id,
     title,
@@ -16,7 +16,7 @@ export async function loadPersona(persona: {title: string}) {
 }
 
 export async function loadSettings() {
-  return loadQuery<SettingsType | null>(
+  return loadQuery<SettingsType>(
     groq`*[_id == "settings"][0]{
     _id,
     title,
@@ -28,7 +28,7 @@ export async function loadSettings() {
 }
 
 export async function loadPostsByPersona(persona: {title: string}) {
-  return loadQuery<PostType[] | null>(
+  return loadQuery<PostType[]>(
     groq`*[_type == "post" && persona->title == $persona.title]|order(publishedAt desc)[0...10]{
     slug,
     title,
