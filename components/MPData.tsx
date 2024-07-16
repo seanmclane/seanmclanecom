@@ -1,7 +1,7 @@
 import { formatISODateToLocaleString } from "@/utilities"
 import Link from "next/link"
 import { loadPersona } from "@/sanity/lib/queries"
-import { getClimbsData } from "@/app/actions"
+import { getClimbsData } from "@/utilities"
 
 export default async function MPData() {
   const [{data: persona}, {
