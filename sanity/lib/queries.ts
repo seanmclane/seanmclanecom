@@ -2,9 +2,8 @@ import { groq } from "next-sanity"
 import { loadQuery } from './loadQuery'
 import { PersonaType, PostType, SettingsType } from "@/types"
 
-export async function getPersona(persona: {title: string}) {
-  return loadQuery<PersonaType>({
-    query:
+export async function loadPersona(persona: {title: string}) {
+  return loadQuery<PersonaType>(
     groq`*[_type == "persona" && title == $persona.title][0]{
     _id,
     title,
@@ -13,14 +12,11 @@ export async function getPersona(persona: {title: string}) {
     profileImage {alt, "image": asset->url},
     fullBio,
     socialLinks[]{url, icon{"image": asset->url}, name}
-    }`,
-    params: {persona}
-  })
+    }`, { persona }, {next: {tags: ["persona"]}})
 }
 
-export async function getSettings() {
-  return loadQuery<SettingsType>({
-    query: 
+export async function loadSettings() {
+  return loadQuery<SettingsType>(
     groq`*[_id == "settings"][0]{
     _id,
     title,
@@ -28,19 +24,15 @@ export async function getSettings() {
     footer,
     ogImage {"image": asset->url}
     }
-    `
-  })
+    `, {}, {next: {tags: ["settings"]}})
 }
 
-export async function getPostsByPersona(persona: {title: string}) {
-  return loadQuery<PostType[]>({
-    query:
+export async function loadPostsByPersona(persona: {title: string}) {
+  return loadQuery<PostType[]>(
     groq`*[_type == "post" && persona->title == $persona.title]|order(publishedAt desc)[0...10]{
     slug,
     title,
     publishedAt,
     mainImage {alt, "image": asset->url}
-    }`
-  , params: { persona }
-})
+    }`, { persona }, {next: {tags: ["post"]}})
 }

@@ -5,15 +5,15 @@ interface Props {
   selected?: string
 }
 
-async function getPersonas() {
+async function loadPersonas() {
   //adding stega false stopped weird characters in my links
   //hopefully this works on vercel previews too...
-  const personas = await loadQuery<string[]>({ query: `*[_type == "persona" && active == true]| order(order) .title`, stega: false})
+  const personas = await loadQuery<string[]>(`*[_type == "persona" && active == true]| order(order) .title`, {}, {stega: false, next: { tags: ["persona"] }})
   return personas
 }
 
 export default async function PersonaSelector({selected}: Props) {
-  const personas = await getPersonas()
+  const {data: personas} = await loadPersonas()
 
   return (
     <div className="flex flex-col items-center px-4 lg:px-8 mt-16">
