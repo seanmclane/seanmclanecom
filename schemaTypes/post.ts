@@ -22,11 +22,6 @@ export default defineType({
       validation: rule => rule.required()
     }),
     defineField({
-      name: 'draft',
-      title: 'Draft',
-      type: 'boolean'
-    }),
-    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',

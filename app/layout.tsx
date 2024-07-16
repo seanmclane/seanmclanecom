@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
-import { Spectral, Bebas_Neue } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from "next"
+import { Spectral, Bebas_Neue } from "next/font/google"
+import "./globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { getSettings } from "@/sanity/sanity.query";
-import { toPlainText } from "next-sanity";
-import { SettingsType } from "@/types";
+import { getSettings } from "@/sanity/lib/queries"
+import { toPlainText } from "next-sanity"
+import { SettingsType } from "@/types"
+import { draftMode } from "next/headers"
+
+import LiveVisualEditing from "@/sanity/loader/LiveVisualEditing"
 
 const serif = Spectral({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" })
 const sans = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-sans"})
@@ -29,14 +32,15 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <SpeedInsights />
       <body className={`${serif.variable} ${sans.variable} font-serif min-h-screen flex-col items-center`}>
         {children}
+        {draftMode().isEnabled && <LiveVisualEditing />}
       </body>
     </html>
-  );
+  )
 }

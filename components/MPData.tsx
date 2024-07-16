@@ -1,7 +1,7 @@
 import { convertClimbsToJSON, formatISODateToLocaleString } from "@/utilities"
 import { ClimbsType } from "@/types"
 import Link from "next/link"
-import { getPersona } from "@/sanity/sanity.query"
+import { getPersona } from "@/sanity/lib/queries"
 import { PersonaType } from "@/types"
 
 const ratingCodes = {
