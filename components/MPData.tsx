@@ -1,5 +1,4 @@
 import { formatISODateToLocaleString } from "@/utilities"
-import { MPDataType } from "@/types"
 import Link from "next/link"
 import { loadPersona } from "@/sanity/lib/queries"
 import { getClimbsData } from "@/app/actions"
