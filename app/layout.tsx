@@ -2,9 +2,8 @@ import type { Metadata } from "next"
 import { Spectral, Bebas_Neue } from "next/font/google"
 import "./globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { getSettings } from "@/sanity/lib/queries"
+import { loadSettings } from "@/sanity/lib/queries"
 import { toPlainText } from "next-sanity"
-import { SettingsType } from "@/types"
 import { draftMode } from "next/headers"
 
 import LiveVisualEditing from "@/sanity/loader/LiveVisualEditing"
@@ -13,7 +12,7 @@ const serif = Spectral({ subsets: ["latin"], weight: ["400", "700"], variable: "
 const sans = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-sans"})
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings: SettingsType = await getSettings()
+  const {data: settings} = await loadSettings()
   return {
     title: settings?.title
       ? {

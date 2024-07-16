@@ -3,6 +3,7 @@ import { PostType } from "@/types"
 import { formatISODateToLocaleString } from "@/utilities"
 import Body from "@/components/Body"
 import { Image } from "next-sanity/image"
+import { QueryResponseInitial } from "@sanity/react-loader"
 
 interface Params {
   params: {
@@ -10,10 +11,9 @@ interface Params {
   }
 }
 
-async function getPost(params: {slug: string}): Promise<PostType> {
+async function getPost(params: {slug: string}): Promise<QueryResponseInitial<PostType>> {
   const { slug } = params
-  const post = await loadQuery<PostType>({
-    query: 
+  const post = await loadQuery<PostType>(
   `*[_type == "post" && slug.current == $slug][0]{
     title,
     persona -> {
@@ -24,20 +24,19 @@ async function getPost(params: {slug: string}): Promise<PostType> {
     publishedAt,
     mainImage {alt, "image": asset->url},
     body
-  }`, params: { slug }
-})
+  }`, { slug }, {next: {tags: [`post:${slug}`, "persona"]}})
   return post
 }
 
 export async function generateMetadata({params}: Params) {
-  const post = await getPost(params)
+  const { data: post } = await getPost(params)
   return {
     title: post.title
   }
 }
 
 export default async function Post({params}: Params) {
-  const post = await getPost(params)
+  const {data: post} = await getPost(params)
 
   return (
     <div className="flex flex-col items-center max-w-6xl m-auto">

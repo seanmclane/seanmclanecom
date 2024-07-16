@@ -1,5 +1,5 @@
 import PersonaSelector from "@/components/PersonaSelector"
-import { getPersona, getPostsByPersona } from "@/sanity/lib/queries"
+import { loadPersona, loadPostsByPersona } from "@/sanity/lib/queries"
 import Card from "@/components/Card"
 import Hero from "@/components/Hero"
 import Link from "next/link"
@@ -11,8 +11,12 @@ export const metadata = {
 }
 
 export default async function Developer() {
-  const persona = await getPersona({title: "developer"})
-  const posts = await getPostsByPersona({title: "developer"})
+
+  const [{data: persona}, {data: posts}] = await Promise.all([
+    loadPersona({title: "developer"}),
+    loadPostsByPersona({title: "developer"})
+  ])
+
   return (
   <div>
     <ShanLogoHeader links={persona.socialLinks} />

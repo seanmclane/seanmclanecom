@@ -1,7 +1,7 @@
 import { convertClimbsToJSON, formatISODateToLocaleString } from "@/utilities"
 import { ClimbsType } from "@/types"
 import Link from "next/link"
-import { getPersona } from "@/sanity/lib/queries"
+import { loadPersona } from "@/sanity/lib/queries"
 import { PersonaType } from "@/types"
 
 const ratingCodes = {
@@ -334,7 +334,7 @@ async function getData() {
 }
 
 export default async function MPData() {
-  const persona: PersonaType = await getPersona({title: "climber"})
+  const persona: PersonaType = await loadPersona({title: "climber"})
   const data = await getData()
  
   const climbsJSON: ClimbsType[] = convertClimbsToJSON(data)
