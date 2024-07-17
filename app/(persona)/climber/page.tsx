@@ -17,9 +17,6 @@ export default async function Climber() {
     loadPersona({title: "climber"}),
     loadPostsByPersona({title: "climber"})
   ])
-
-  console.log(posts[0].publishedAt)
-  console.log(formatISODateToLocaleString(posts[0].publishedAt))
   
   return (
   <>
