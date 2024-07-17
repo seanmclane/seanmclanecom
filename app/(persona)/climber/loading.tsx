@@ -1,4 +1,4 @@
-import PersonaSelector from "@/components/PersonaSelector"
+import PersonaSelectorLoading from "@/components/PersonaSelectorLoading"
 import HeroLoading from "@/components/HeroLoading"
 import ShanLogoHeader from "@/components/ShanLogoHeader"
 import CardLoading from "@/components/CardLoading"
@@ -29,7 +29,7 @@ export default function Loading() {
   return (
   <>
     <ShanLogoHeader links={[]} />
-    <PersonaSelector selected="climber"/>
+    <PersonaSelectorLoading selected="climber"/>
     <HeroLoading />
     <div className="flex flex-col items-center mb-8">
       <MPDataLoading />

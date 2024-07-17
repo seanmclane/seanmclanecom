@@ -5,8 +5,8 @@ export default function MPDataLoading() {
         Sean on Mountain Project
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
-        {[1,2,3,4].map(() =>(
-          <div className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md"> 
+        {[1,2,3,4].map(i =>(
+          <div key={i} className="p-2 m-2 text-white bg-theme rounded-lg min-w-40 text-center shadow-md"> 
           <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <span className="sr-only">Loading...</span>
