@@ -42,7 +42,8 @@ export default defineConfig({
             // S.documentTypeListItem("blogPost").title("Blog Posts"),
             // S.documentTypeListItem("author").title("Authors"),
             S.documentTypeListItem("post").title("Blog Posts"),
-            S.documentTypeListItem("persona").title("Personas")
+            S.documentTypeListItem("persona").title("Personas"),
+            S.documentTypeListItem("climb").title("Climbs")
           ])
         }), 
       visionTool(),

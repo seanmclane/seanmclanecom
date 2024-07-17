@@ -1,6 +1,6 @@
 import { groq } from "next-sanity"
 import { loadQuery } from './loadQuery'
-import { PersonaType, PostType, SettingsType } from "@/types"
+import { ClimbsType, PersonaType, PostType, SettingsType } from "@/types"
 
 export async function loadPersona(persona: {title: string}) {
   return loadQuery<PersonaType>(
@@ -35,4 +35,27 @@ export async function loadPostsByPersona(persona: {title: string}) {
     publishedAt,
     mainImage {alt, "image": asset->url}
     }`, { persona }, {next: {tags: ["post"]}})
+}
+
+export async function loadClimbs() {
+  return loadQuery<ClimbsType[]>(
+    groq`*[_type == "climb"]|order(date desc){
+    _id,
+    date,
+    route,
+    rating,
+    notes,
+    url,
+    pitches,
+    location,
+    avgStars,
+    yourStars,
+    style,
+    leadStyle,
+    routeType,
+    yourRating,
+    length,
+    ratingCode
+    }
+    `, {}, {next: {tags: ["climb"]}})
 }

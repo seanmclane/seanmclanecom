@@ -45,7 +45,26 @@ export type PostType = {
   body: PortableTextBlock[],
 }
 
+
 export type ClimbsType = {
+  date: string,
+  route: string,
+  rating: string,
+  notes: string,
+  url: string,
+  pitches: number,
+  location: string,
+  avgStars: number,
+  yourStars: number,
+  style: string,
+  leadStyle?: string,
+  routeType: string,
+  yourRating: string,
+  length: number,
+  ratingCode: number
+}
+
+export type MPClimbsType = {
   Date: string,
   Route: string,
   Rating: string,
@@ -53,14 +72,14 @@ export type ClimbsType = {
   URL: string,
   Pitches: number,
   Location: string,
-  Avg_Stars: number,
-  Your_Stars: number,
+  'Avg Stars': number,
+  'Your Stars': number,
   Style: string,
-  Lead_Style?: string,
-  Route_Type: string,
-  Your_Rating: string,
+  'Lead Style'?: string,
+  'Route Type': string,
+  'Your Rating': string,
   Length: number,
-  Rating_Code: number
+  'Rating Code': number
 }
 
 export type MPDataType = {

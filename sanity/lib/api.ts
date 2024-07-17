@@ -20,6 +20,8 @@ export const apiVersion =
 // See the app/api/revalidate/route.ts for how this is used
 export const revalidateSecret = process.env.SANITY_REVALIDATE_SECRET
 
+export const cliToken = process.env.SANITY_CLI_TOKEN
+
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)
