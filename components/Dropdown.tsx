@@ -31,7 +31,7 @@ export default function Dropdown({defaultState, items, listStyle}: DropdownProps
     <div ref={container}>
       <button onClick={() => setShow(current => !current)}>
         {selected}<BiCaretDown className="inline" />
-        {show && <ul className={`absolute py-2 lg:py-4 ${listStyle || ""}`}>{items.map(i => i!==selected && (
+        {show && <ul className={`absolute z-50 py-2 lg:py-4 ${listStyle || ""}`}>{items.map(i => i!==selected && (
           <li className="text-left px-4 lg:px-8" key={i} onClick={() => {
             setSelected(i)
             router.push(`/${i}`)
