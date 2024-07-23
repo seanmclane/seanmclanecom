@@ -17,6 +17,10 @@ export default async function Nerd() {
     loadPostsByPersona({title: "nerd"})
   ])
 
+  if (!persona) {
+    return <></>
+  }
+
   return (
   <div>
     <ShanLogoHeader links={persona.socialLinks} />

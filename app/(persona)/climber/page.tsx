@@ -17,6 +17,10 @@ export default async function Climber() {
     loadPersona({title: "climber"}),
     loadPostsByPersona({title: "climber"})
   ])
+
+  if (!persona) {
+    return <></>
+  }
   
   return (
   <>

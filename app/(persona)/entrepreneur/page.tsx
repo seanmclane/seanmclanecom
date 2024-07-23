@@ -17,6 +17,10 @@ export default async function Entrepreneur() {
     loadPostsByPersona({title: "entrepreneur"})
   ])
 
+  if (!persona) {
+    return <></>
+  }
+
   return (
   <div>
     <ShanLogoHeader links={persona.socialLinks} />

@@ -17,6 +17,10 @@ export default async function Musician() {
     loadPostsByPersona({title: "musician"})
   ])
 
+  if (!persona) {
+    return <></>
+  }
+
   return (
   <div>
     <ShanLogoHeader links={persona.socialLinks} />
