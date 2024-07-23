@@ -50,11 +50,6 @@ export default defineType({
       validation: (rule) => rule.required().min(1).max(10)
     }),
     defineField({
-      name: 'active',
-      title: 'Active',
-      type: 'boolean'
-    }),
-    defineField({
       name: "socialLinks",
       title: "Social Links",
       type: "array",

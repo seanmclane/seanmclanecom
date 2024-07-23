@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SpeedInsights />
-      <body className={`${serif.variable} ${sans.variable} font-serif min-h-screen flex-col items-center`}>
+      <body className={`${serif.variable} ${sans.variable} font-serif min-h-screen flex-col items-center selection:bg-theme-dark selection:text-white`}>
         {children}
         {draftMode().isEnabled && <LiveVisualEditing />}
       </body>

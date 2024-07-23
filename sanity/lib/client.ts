@@ -1,4 +1,5 @@
 import { createClient } from 'next-sanity'
+import { writeToken } from "./api"
 
 import {
   apiVersion,
@@ -19,4 +20,12 @@ export const client = createClient({
     studioUrl,
     logger: console
   },
+})
+
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: writeToken
 })

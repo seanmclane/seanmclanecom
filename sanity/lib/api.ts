@@ -21,6 +21,7 @@ export const apiVersion =
 export const revalidateSecret = process.env.SANITY_REVALIDATE_SECRET
 
 export const cliToken = process.env.SANITY_CLI_TOKEN
+export const writeToken = process.env.SANITY_WRITE_TOKEN
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {

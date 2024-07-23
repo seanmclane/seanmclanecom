@@ -1,37 +1,33 @@
 import PersonaSelector from "@/components/PersonaSelector"
-import { loadPostsByPersona, loadPersona} from "@/sanity/lib/queries"
+import { loadPersona, loadPostsByPersona } from "@/sanity/lib/queries"
 import Card from "@/components/Card"
 import Hero from "@/components/Hero"
 import Link from "next/link"
 import { formatISODateToLocaleString } from "@/utilities"
-import MPData from "@/components/MPData"
 import ShanLogoHeader from "@/components/ShanLogoHeader"
 
 export const metadata = {
-  title: "Climber"
+  title: "Entrepreneur"
 }
 
-export default async function Climber() {
+export default async function Entrepreneur() {
 
   const [{data: persona}, {data: posts}] = await Promise.all([
-    loadPersona({title: "climber"}),
-    loadPostsByPersona({title: "climber"})
+    loadPersona({title: "entrepreneur"}),
+    loadPostsByPersona({title: "entrepreneur"})
   ])
 
   if (!persona) {
     return <></>
   }
-  
+
   return (
-  <>
+  <div>
     <ShanLogoHeader links={persona.socialLinks} />
-    <PersonaSelector selected="climber"/>
+    <PersonaSelector selected="entrepreneur"/>
     <Hero persona={persona} />
     <div className="flex flex-col items-center mb-8">
-      <MPData />
-    </div>
-    <div className="flex flex-col items-center mb-8">
-      <h2 className="text-4xl">Blog Posts</h2>
+      <h2 className="text-4xl" >Blog Posts</h2>
       <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-center lg:max-w-6xl m-auto">
         {posts.length>0 && posts.map(p => (
           <Link className="m-4" href={`/post/${p.slug.current}`} key={p.slug.current}>
@@ -47,6 +43,6 @@ export default async function Climber() {
         ))}
       </div>
     </div>
-  </>
+  </div>
   )
 }
