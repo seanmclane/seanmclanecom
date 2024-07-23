@@ -89,3 +89,9 @@ export type MPDataType = {
   hardestSport: ClimbsType,
   hardestTrad: ClimbsType
 }
+
+export type ContactFormType = {
+  name: string,
+  email: string,
+  message: string
+}

@@ -82,7 +82,6 @@ export default defineType({
     },
   },
   initialValue: () => ({
-    draft: true,
     publishedAt: new Date().toISOString()
   })
 })

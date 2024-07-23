@@ -15,6 +15,12 @@ const settings = {
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "contactEmail",
+      title: "Contact Email",
+      type: "email",
+      validation: (rule) => rule.required()
+    }),
+    defineField({
       name: 'overview',
       description:
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',

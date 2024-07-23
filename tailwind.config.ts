@@ -18,7 +18,8 @@ const config: Config = {
         sans: ['var(--font-sans)']
       },
       colors: {
-        "theme": 'rgb(94, 177, 177)'
+        "theme": 'rgb(94, 177, 177)',
+        "theme-dark": 'rgb(88, 158, 158)'
       }
     },
   },
