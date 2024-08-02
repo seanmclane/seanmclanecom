@@ -4,6 +4,7 @@ import { formatISODateToLocaleString } from "@/utilities"
 import Body from "@/components/Body"
 import { Image } from "next-sanity/image"
 import { QueryResponseInitial } from "@sanity/react-loader"
+import { urlForImage } from "@/sanity/lib/image"
 
 interface Params {
   params: {
@@ -38,9 +39,11 @@ export async function generateMetadata({params}: Params) {
 export default async function Post({params}: Params) {
   const {data: post} = await getPost(params)
 
+  // use image builder so it respects image hotspots set in Sanity
+  const mainImageURL = urlForImage(post.mainImage.image).height(600).width(1200).url()
   return (
     <div className="flex flex-col items-center max-w-6xl m-auto">
-      <Image src={post.mainImage.image} alt={post.mainImage.alt} width={1200} height={600} className="mb-8" priority />
+      <Image src={mainImageURL} alt={post.mainImage.alt} width={1200} height={600} className="mb-8" priority />
     <article className="flex flex-col items-center max-w-4xl w-full">
       <h1>{post.title}</h1>
       <h3 className="mb-8">{formatISODateToLocaleString(post.publishedAt)}</h3>
