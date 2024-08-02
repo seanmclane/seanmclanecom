@@ -43,8 +43,7 @@ export default defineConfig({
             // S.documentTypeListItem("author").title("Authors"),
             S.documentTypeListItem("post").title("Blog Posts"),
             S.documentTypeListItem("persona").title("Personas"),
-            S.documentTypeListItem("climb").title("Climbs"),
-            S.documentTypeListItem("contactForm").title("Contact Forms")
+            S.documentTypeListItem("climb").title("Climbs")
           ])
         }), 
       visionTool(),
