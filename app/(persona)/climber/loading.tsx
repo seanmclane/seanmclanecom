@@ -36,7 +36,7 @@ export default function Loading() {
     </div>
     <div className="flex flex-col items-center mb-8">
       <h2 className="text-4xl">Blog Posts</h2>
-      <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-center lg:max-w-6xl m-auto">
+      <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-center lg:max-w-[1400px] m-auto flex-wrap">
         {posts.length>0 && posts.map(p => (
           <CardLoading key={p.slug.current}/>
         ))}
