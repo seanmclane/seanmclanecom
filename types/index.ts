@@ -40,7 +40,10 @@ export type PostType = {
   persona: PersonaType,
   mainImage: {
     alt: string,
-    image: string
+    image: string,
+    asset?: any,
+    crop?: any,
+    hotspot?: any
   },
   body: PortableTextBlock[],
 }

@@ -33,7 +33,7 @@ export async function loadPostsByPersona(persona: {title: string}) {
     slug,
     title,
     publishedAt,
-    mainImage {alt, "image": asset->url}
+    mainImage {alt, "image": asset->url, asset, hotspot, crop}
     }`, { persona }, {next: {tags: ["post"]}})
 }
 

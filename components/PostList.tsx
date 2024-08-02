@@ -14,7 +14,7 @@ export default function PostList({posts}: {posts: PostType[]}) {
           <Card
             title={p.title}
             subtitle={formatISODateToLocaleString(p.publishedAt)}
-            image={urlForImage(p.mainImage.image).height(200).width(400).url()}
+            image={urlForImage(p.mainImage).height(200).width(400).url()}
             alt={p.mainImage.alt}
             bgClass="bg-gray-100"
             textClass="text-gray-800"
