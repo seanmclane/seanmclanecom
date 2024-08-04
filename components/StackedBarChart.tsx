@@ -41,7 +41,7 @@ const CustomTooltip = ({active, payload}: TooltipProps) => {
     return (
       <div className="bg-white shadow-lg pl-4 pr-2 py-2 rounded-lg max-w-48 flex flex-col-reverse">
         {payload.map(item => item.value !== 0 ? (
-          <div className="mr-2" style={{color: item.fill}}>
+          <div key={item.name} className="mr-2" style={{color: item.fill}}>
             <h4>{item.name}</h4>
             <p>{item.value}</p>
           </div>
