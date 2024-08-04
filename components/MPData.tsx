@@ -445,7 +445,7 @@ export default async function MPData() {
           <h3>{hardestSport.rating}</h3>
         </Link>
       </div>
-      <h2 className="my-4">My Climbs in {new Date().toLocaleString('en-US',{year: "numeric"})}</h2>
+      <h2 className="my-4">Pitches Climbed in {new Date().toLocaleString('en-US',{year: "numeric"})}</h2>
       <StackedBarChart
         data={climbsByMonth}
         xKey="month"
