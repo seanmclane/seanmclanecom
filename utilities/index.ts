@@ -12,3 +12,8 @@ export function formatISODateToLocaleString(isoDate: string) {
     timeZone: 'UTC'
   })
 }
+
+export function getMonthNameFromIndex(monthIndex: number) {
+  const date = new Date(2020, monthIndex, 1)
+  return date.toLocaleString('en-US', {month: 'short'})
+}

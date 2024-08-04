@@ -25,9 +25,7 @@ export default async function Climber() {
     <ShanLogoHeader links={persona.socialLinks} />
     <PersonaSelector selected="climber"/>
     <Hero persona={persona} />
-    <div className="flex flex-col items-center mb-8">
-      <MPData />
-    </div>
+    <MPData />
     <PostList posts={posts} />
   </>
   )

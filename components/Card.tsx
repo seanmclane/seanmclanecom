@@ -16,7 +16,7 @@ export default function Card({title, subtitle, shortDescription, image, alt, wid
   return (
     <div className={`${bgClass} ${textClass} flex flex-col items-start rounded-lg shadow-md`}>
       <div>
-        {image ? <Image className="rounded-t-lg" src={image} alt={alt || "placeholder image"} width={width || 400} height={height || 200}/> : <span className="flex flex-1"></span>}
+        {image ? <Image className="rounded-t-lg" src={image} alt={alt || "placeholder image"} width={width || 400} height={height || 300}/> : <span className="flex flex-1"></span>}
       </div>
       <div className="p-4">
         <h2>{title}</h2>

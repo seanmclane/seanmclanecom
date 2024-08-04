@@ -52,8 +52,8 @@ export default async function Post({params}: Params) {
       <div className="flex flex-col justify-start mx-8" id="postPortableText">
       <Body props={post.body} />
       </div>
-      <hr className=" border-gray-400 mt-16 w-5/6"/>
-      <div className="flex flex-row justify-center items-center p-4 my-8">  
+      <hr className=" border-gray-400 mt-6 w-5/6"/>
+      <div className="flex flex-row justify-center items-center p-4 mt-6 mb-8">  
         <Image className="rounded-full grayscale" src={personaImageURL} alt={post.persona.profileImage.alt} width={60} height={60} />
         <div className="text-gray-500 pl-4">
           <span >{post.persona.fullName}</span>

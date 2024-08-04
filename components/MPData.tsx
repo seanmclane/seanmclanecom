@@ -1,7 +1,9 @@
-import { formatISODateToLocaleString } from "@/utilities"
 import Link from "next/link"
 import { loadPersona, loadClimbs } from "@/sanity/lib/queries"
 import { ClimbsType } from "@/types"
+
+import { getMonthNameFromIndex } from "@/utilities"
+import StackedBarChart from "./StackedBarChart"
 
 function processClimbs(climbs: ClimbsType[]) {
   const ratingCodes = {
@@ -325,7 +327,48 @@ function processClimbs(climbs: ClimbsType[]) {
   
   }
 
-  const recentClimbs = climbs.slice(0,6)
+  const yearString = String(new Date().getFullYear())
+  const climbsThisYear = climbs.filter(c => c.date.substring(0,4) === yearString)
+
+  type MonthlyDataType = {
+    month: string,
+    Sport: number,
+    Mixed: number,
+    Ice: number,
+    Trad: number
+  }
+  const climbsByMonth = climbsThisYear.reduce((acc: MonthlyDataType[], c) => {
+    const month = Number(c.date.substring(5,7)) - 1
+    //filter routeTypes
+    let type: keyof MonthlyDataType
+    if(c.routeType.includes("Mixed")) {
+      type = "Mixed"
+    } else if (c.routeType.includes("Ice")) {
+      type = "Ice"
+    } else if (c.routeType.includes("Trad")) {
+      type = "Trad"
+    } else {
+      type = "Sport"
+    }
+    if (acc[month]) {
+      acc[month] = {
+        ...acc[month],
+        month: getMonthNameFromIndex(month),
+        [type]: (acc[month][type] || 0) + c.pitches
+      }
+    } else {
+      acc[month] = {
+        Sport: 0,
+        Mixed: 0,
+        Ice: 0,
+        Trad: 0,
+        month: getMonthNameFromIndex(month),
+        [type]: c.pitches
+      }
+    }
+    
+    return acc
+  }, [])
 
   const hardestSport = climbs.filter(c => 
     c.ratingCode in ratingCodes.rock
@@ -355,7 +398,7 @@ function processClimbs(climbs: ClimbsType[]) {
   ).sort((a,b) => Number(b.rating.substring(1,3)) - Number(a.rating.substring(1,3)))[0]
 
   return {
-    recentClimbs,
+    climbsByMonth,
     hardestIce,
     hardestMixed,
     hardestSport,
@@ -376,12 +419,12 @@ export default async function MPData() {
     hardestMixed,
     hardestSport,
     hardestTrad,
-    recentClimbs
+    climbsByMonth,
   } = processClimbs(climbsData)
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-theme text-4xl py-2">
+    <div className="flex flex-col items-center mb-16">
+      <h2 className="text-theme text-4xl mb-4">
         <Link href={persona.socialLinks && persona.socialLinks.length > 0 ? persona.socialLinks.filter(s => s.url.includes("mountainproject"))[0].url : "https://www.mountainproject.com"}>Sean on Mountain Project</Link>
       </h2>
       <div className="flex flex-row flex-wrap justify-center">
@@ -402,20 +445,15 @@ export default async function MPData() {
           <h3>{hardestSport.rating}</h3>
         </Link>
       </div>
-      <h2 className="mt-4">Recent Climbs</h2>
-      <div className="flex flex-row flex-wrap justify-center max-w-6xl">
-        {recentClimbs && recentClimbs.map(c => (
-          <div key={`${c.route} - ${c.notes}`} className="text-white bg-theme p-2 m-2 rounded-lg min-w-80 shadow-md">
-            <Link href={c.url}>
-              <h2 className="px-2">{c.route}</h2>
-              <div className="flex flex-row justify-between items-center">
-                <h3 className="px-2">{formatISODateToLocaleString(c.date)}</h3>
-                <h3 className="px-2">{c.rating}</h3>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <h2 className="my-4">My Climbs in {new Date().toLocaleString('en-US',{year: "numeric"})}</h2>
+      <StackedBarChart
+        data={climbsByMonth}
+        xKey="month"
+        barKeys={["Trad", "Sport", "Ice", "Mixed"]}
+        tooltip
+        legend
+        grid
+      />
     </div>
   )
 }

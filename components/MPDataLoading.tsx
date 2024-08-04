@@ -13,14 +13,11 @@ export default function MPDataLoading() {
           </div>)
         )}
       </div>
-      <h2 className="mt-4">Recent Climbs</h2>
-      <div className="flex flex-row flex-wrap justify-center max-w-6xl">
-        {[1,2,3,4,5,6].map(i => (
-          <div key={i} className="text-white bg-theme p-2 m-2 rounded-lg min-w-80 shadow-md">
-              <div className="h-2.5 bg-white rounded-full mb-2.5"></div>
-              <div className="h-2 bg-white rounded-full mb-2.5"></div>
-          </div>
-        ))}
+      <h2 className="my-4">My Climbs in {new Date().toLocaleString('en-US',{year: "numeric"})}</h2>
+      <div className="flex flex-row justify-center items-end max-w-6xl animate-pulse">
+          {[123,240,143,113,179,147].map(i => (
+            <div key={i} className="text-white bg-theme min-w-12 mx-1" style={{height: i}}></div>
+          ))}
       </div>
     </div>
   )
