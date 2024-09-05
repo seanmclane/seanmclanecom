@@ -61,10 +61,16 @@ const client = createClient({
   useCdn: false
 })
 
-// reduce api calls by running only for newer climbs
-const LAST_RUN_DATE = '2024-07-17'
+const logData = {
+  totalClimbs: 0,
+  climbs: []
+}
 
-climbs.filter(c => c.Date >= LAST_RUN_DATE).map(c => {
-  // console.log(transformClimb(c))
+// reduce api calls by running only for newer climbs, set in env UPDATE_CLIMBS_AFTER
+climbs.filter(c => c.Date >= process.env.UPDATE_CLIMBS_AFTER).map(c => {
   client.createOrReplace(transformClimb(c))
+  logData.totalClimbs += 1
+  logData.climbs.push(c.Route)
 })
+
+console.log(`Climbs Added / Updated:\n${logData.totalClimbs}\n${logData.climbs.join("\n")}`)
