@@ -390,12 +390,23 @@ function processClimbs(climbs: ClimbsType[]) {
     && ['Onsight', 'Redpoint', 'Flash'].includes(c.leadStyle)
   ).sort((a,b) => b.ratingCode - a.ratingCode)[0]
 
-  // mixed rating codes apparently don't work right, so use the number after "M"
+  
+  function convertMGradeToNumber(c: ClimbsType) {
+    // mixed rating codes apparently don't work right, so use the number after "M"
+    // parse off plus or minus first
+    if (c.rating.includes("+")) {
+      return Number(c.rating.substring(1,c.rating.length-1)) + .5
+    } else if (c.rating.includes("-")) {
+      return Number(c.rating.substring(1,c.rating.length-1)) - .5
+    } else {
+      return Number(c.rating.substring(1,c.rating.length))
+    }
+  }
   const hardestMixed = climbs.filter(c => 
     c.ratingCode in ratingCodes.mixed
     && c.leadStyle
     && ['Onsight', 'Redpoint', 'Flash'].includes(c.leadStyle)
-  ).sort((a,b) => Number(b.rating.substring(1,3)) - Number(a.rating.substring(1,3)))[0]
+  ).sort((a,b) => convertMGradeToNumber(b) - convertMGradeToNumber(a))[0]
 
   return {
     climbsByMonth,
