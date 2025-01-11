@@ -16,8 +16,8 @@ export default function PostList({posts}: {posts: PostType[]}) {
             subtitle={formatISODateToLocaleString(p.publishedAt)}
             image={urlForImage(p.mainImage).height(300).width(400).url()}
             alt={p.mainImage.alt}
-            bgClass="bg-gray-100"
-            textClass="text-gray-800"
+            bgClass="bg-theme"
+            textClass="text-white"
           />
         </Link>
       ))}

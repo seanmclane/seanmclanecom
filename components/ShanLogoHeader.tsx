@@ -25,9 +25,6 @@ export default function ShanLogoHeader(props: Props) {
             <Image src={l.icon.image} alt={l.name || "social link"} title={l.name || ''} width={30} height={30} />
           </Link>
         )) : null}
-        <Link className="flex flex-row items-center p-1 mr-1" href="/contact" title="Contact">
-          <Image src={contact} alt="contact" width={35} height={35} />
-        </Link>
       </span>
     </div>
   )
