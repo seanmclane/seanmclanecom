@@ -68,9 +68,10 @@ function convertWindDirection (deg: number): string {
 
 function parseSMS(text: string) {
     // FORMAT
+    // Twilio sends spaces as "+"
     // accessCode latitude,longitude days interval
-    // test 10.3,23.4 3 4
-    const values = text.split(" ")
+    // test+10.3,23.4+3+4
+    const values = text.split("+")
     return {
         accessCode: values[0],
         latitude: Number(values[1].split(",")[0]),
