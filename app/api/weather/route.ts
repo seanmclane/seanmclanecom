@@ -247,7 +247,7 @@ export async function GET(req: NextRequest) {
 <Response><Message>
 ${smsBody}</Message></Response>`
 
-        return new Response(twilioResponse, {status: 200})
+        return new Response(twilioResponse, { headers: {"Content-Type": "application/xml"}, status: 200})
     } catch (err: any) {
         console.error(err)
         return new Response(err.message, { status: 500 })
