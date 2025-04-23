@@ -94,7 +94,7 @@ async function getDailyWeather(latitude: number, longitude: number, forecast_day
         longitude,
         "daily": ["temperature_2m_max", "temperature_2m_min", "precipitation_probability_max", "weather_code", "wind_speed_10m_max", "wind_gusts_10m_max", "wind_direction_10m_dominant"],
         forecast_days,
-        "timezone": tz['iana_timezone'] || null
+        "timezone": tz['iana_timezone'] || "UTC"
     }
     const url = "https://api.open-meteo.com/v1/forecast"
     const responses = await fetchWeatherApi(url, params)
@@ -153,7 +153,7 @@ async function getHourlyWeather(latitude: number, longitude: number, forecast_da
         longitude,
         "hourly": ["temperature_2m", "precipitation_probability", "precipitation", "weather_code", "wind_speed_10m", "wind_direction_10m", "wind_gusts_10m"],
         forecast_days,
-        "timezone": tz['iana_timezone'] || null
+        "timezone": tz['iana_timezone'] || "UTC"
     };
     const url = "https://api.open-meteo.com/v1/forecast"
     const responses = await fetchWeatherApi(url, params)
