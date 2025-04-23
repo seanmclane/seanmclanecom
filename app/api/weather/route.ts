@@ -233,16 +233,21 @@ export async function GET(req: NextRequest) {
             return new Response("No text content", {status: 400})
         }
 
-        // TODO validate access code against env variable
-        if (accessCode !== "test") {
+        // validate access code against env variable
+        if (accessCode !== process.env.WEATHER_API_ACCESS_CODE) {
             return new Response("Bad request", {status: 400})
         }
 
         // request hourly or daily based on forecast_days
-        let smsData
-        hourlyInterval ? smsData = await getHourlyWeather(latitude,longitude,forecastDays,hourlyInterval) : smsData = await getDailyWeather(latitude,longitude,forecastDays)
+        let smsBody
+        hourlyInterval ? smsBody = await getHourlyWeather(latitude,longitude,forecastDays,hourlyInterval) : smsBody = await getDailyWeather(latitude,longitude,forecastDays)
 
-        return new Response(smsData, {status: 200})
+        const twilioResponse = 
+`<?xml version="1.0" encoding="UTF-8"?>
+<Response><Message>
+${smsBody}</Message></Response>`
+
+        return new Response(twilioResponse, {status: 200})
     } catch (err: any) {
         console.error(err)
         return new Response(err.message, { status: 500 })
