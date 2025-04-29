@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { fetchWeatherApi } from 'openmeteo'
+import crypto from "crypto"
 
 // Helper Functions
 // convert weatherData to sms format
@@ -64,6 +65,19 @@ function convertWindDirection (deg: number): string {
     let directions = ["N", "NW", "W", "SW", "S", "SE", "E", "NE"]
     let i = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8
     return String(directions[i])
+}
+
+function validateTextbelt(apiKey: string, timestamp: string, requestSignature: string, requestPayload: any) {
+    const mySignature = crypto
+    .createHmac("sha256", apiKey)
+    .update(timestamp + requestPayload)
+    .digest("hex")
+    
+  return crypto.timingSafeEqual(
+    //@ts-ignore
+    Buffer.from(requestSignature),
+    Buffer.from(mySignature)
+  )
 }
 
 function parseSMS(text: string) {
@@ -210,7 +224,7 @@ async function getHourlyWeather(latitude: number, longitude: number, forecast_da
     return weatherData.hourly.time.reduce((acc, t, i) => acc+convertHourlyForecastString(t,i),`${response.latitude()},${response.longitude()} ${response.elevation()}\n`)
 }
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
     try {
         // set accessCode lat lon forecastDays defaults
         let latitude = 50
@@ -220,7 +234,21 @@ export async function GET(req: NextRequest) {
         let accessCode = ""
 
         // get accessCode lat lon forecastDays from request
-        const text = req.nextUrl.searchParams.get("Body")
+        const smsin: {
+            fromNumber: string,
+            text: string
+        } = await req.json()
+        const {text, fromNumber} = smsin
+
+        // const {headers} = req
+
+        // const payload = await req.body
+        
+        //TODO fix validation
+        // if (!validateTextbelt(process.env.TEXTBELT_API_KEY || "", headers.get('x-textbelt-timestamp') || "", headers.get('x-textbelt-signature') || "", payload)) {
+        //     return new Response("Bad request", {status: 400})
+        // }
+
         if (text) {
             const values = parseSMS(text)
             // don't know why I can't  use {} = values
@@ -239,15 +267,25 @@ export async function GET(req: NextRequest) {
         }
 
         // request hourly or daily based on forecast_days
-        let smsBody
-        hourlyInterval ? smsBody = await getHourlyWeather(latitude,longitude,forecastDays,hourlyInterval) : smsBody = await getDailyWeather(latitude,longitude,forecastDays)
+        let weatherString
+        hourlyInterval ? weatherString = await getHourlyWeather(latitude,longitude,forecastDays,hourlyInterval) : weatherString = await getDailyWeather(latitude,longitude,forecastDays)
 
-        const twilioResponse = 
-`<?xml version="1.0" encoding="UTF-8"?>
-<Response><Message>
-${smsBody}</Message></Response>`
+        let smsBody = JSON.stringify({
+            phone: fromNumber,
+            message: weatherString,
+            key: process.env.TEXTBELT_API_KEY
+        })
 
-        return new Response(twilioResponse, { headers: {"Content-Type": "application/xml"}, status: 200})
+        const smsResponse =  new Request("https://textbelt.com/text", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: smsBody
+        })
+
+        let response = await fetch(smsResponse)
+
+        return new Response(response.body, {status: 200})
+
     } catch (err: any) {
         console.error(err)
         return new Response(err.message, { status: 500 })
